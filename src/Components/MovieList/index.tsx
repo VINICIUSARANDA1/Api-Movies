@@ -30,12 +30,25 @@ export default function MovieList(){
 
   
     return(
-        <ul className="movie-list">
-          {movies.map((movie) =>
-            <li className='movie-card'> 
-                {movie.title}
-            </li>
-          )}
-        </ul>
+<ul className="movie-list">
+  {movies.map((movie) => {
+    const imageUrl = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
+
+    return (
+      <li className="movie-card" key={movie.id}> 
+        <p>{movie.title}</p>
+        <p className="description">{movie.overview}</p>
+        
+        {/* Verifica se o poster_path existe antes de renderizar a imagem */}
+        {movie.poster_path ? (
+          <img src={imageUrl} alt={movie.title} />
+        ) : (
+          <p>Imagem não disponível</p>
+        )}
+      </li>
+    );
+  })}
+</ul>
+
     )
 }
